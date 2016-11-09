@@ -1,0 +1,141 @@
+
+@import url('app://bower_components/fontawesome/css/font-awesome.min.css');
+
+h3 {
+    padding: 10px 15px;
+
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    border-bottom: 1px solid #656566;
+
+    font-size: 18px;
+    font-family: '微软雅黑', "Microsoft YaHei";
+}
+
+.title {
+    margin: auto;
+    height: 40px;
+}
+
+.asset-name {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.asset-scene {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    width: 150px;
+}
+
+.btn-brower {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.btn-clear {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.btn-selectAll {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: 5%;
+}
+
+.btn-foldedAll {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: -20%;
+}
+
+.btn-parse {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 80px;
+}
+
+.btn-export {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 80px;
+}
+
+ui-box-container {
+    background: #333;
+
+    min-height: 320px;
+    max-height: 320px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+footer {
+    margin: auto;
+
+    max-width: 100%;
+    min-height: 50px;
+}
+
+.item {
+    height: 5%;
+}
+
+.item-content {
+    margin-left: 24px;
+}
+
+.item-checkbox {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.item-img {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.item-name {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 1.5%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+
+    white-space: nowrap;
+    height: 16px;
+
+    color: #aaa;
+    cursor: default;
+
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+#foldIcon {
+    flex: none;
+
+    font-size: 14px;
+    width: 10px;
+    margin-right: 2px;
+
+    cursor: pointer;
+    text-align: center;
+
+    visibility: visible;
+}

@@ -1,0 +1,31 @@
+{
+  "name": "cocos-package",
+  "version": "0.0.1",
+  "description": "用于导出场景和场景相关资源",
+  "author": "Knox",
+  "main": "main.js",
+  "main-menu": {
+    "i18n:MAIN_MENU.package.title/Knox/cocos-package": {
+      "message": "cocos-package:open"
+    }
+  },
+
+  "panel": {
+    "main": "panel/index.js",
+    "type": "dockable",
+    "title": "CocosPackage",
+    "min-width": 400,
+    "max-width": 400,
+    "width": 400,
+    "min-height": 480,
+    "max-height": 480,
+    "height": 480,
+
+    "profiles": {
+      "local": {
+        "current-scene": "",
+        "export-resource-path": ""
+      }
+    }
+  }
+}
