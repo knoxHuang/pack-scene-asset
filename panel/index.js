@@ -1,10 +1,10 @@
-
-var Define = Editor.require('packages://cocos-package/define.js');
-var Utils = Editor.require('packages://cocos-package/utils.js');
+var Electron = require('electron');
 var Fs = require("fire-fs");
 var Path = require("fire-path");
 var Detective = require('detective');
 
+var Define = Editor.require('packages://cocos-package/define.js');
+var Utils = Editor.require('packages://cocos-package/utils.js');
 var Item =  Editor.require('packages://cocos-package/panel/item.js');
 
 
@@ -263,6 +263,7 @@ Editor.Panel.extend({
                             Utils.copyFile(item.fspath, path + "/" + item.name);
                             Utils.copyFile(item.fspath + ".meta", path + "/" + item.name + ".meta");
                         }
+                        Electron.shell.showItemInFolder(path + "/" + this.itemList[0].name);
                     });
                 }
 
