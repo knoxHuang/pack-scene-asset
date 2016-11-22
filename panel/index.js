@@ -7,6 +7,8 @@ var Define = Editor.require('packages://cocos-package/define.js');
 var Utils = Editor.require('packages://cocos-package/utils.js');
 var Item =  Editor.require('packages://cocos-package/panel/item.js');
 
+var JSZip = Editor.require('packages://cocos-package/lib/jszip.min.js');
+var zip = new JSZip();
 
 var uuidlist = [];
 var getUuidAll = function (data) {
@@ -260,13 +262,22 @@ Editor.Panel.extend({
                     Utils.showExportResDialog((path) => {
                         for (var i = 0; i < this.itemList.length; ++i) {
                             var item = this.itemList[i];
-                            Utils.copyFile(item.fspath, path + "/" + item.name);
-                            Utils.copyFile(item.fspath + ".meta", path + "/" + item.name + ".meta");
+                            zip.file(item.name, Fs.readFileSync(item.fspath));
+                            zip.file(item.name + ".meta", Fs.readFileSync(item.fspath + ".meta"));
+                            //Utils.copyFile(item.fspath, path + "/" + item.name);
+                            //Utils.copyFile(item.fspath + ".meta", path + "/" + item.name + ".meta");
                         }
+
+                        zip .generateNodeStream({type:'nodebuffer',streamFiles:true})
+                            .pipe(Fs.createWriteStream(path + '/out.zip'))
+                            .on('finish', function () {
+                                console.log("out.zip written.");
+                            });
+
                         Electron.shell.showItemInFolder(path + "/" + this.itemList[0].name);
+
                     });
                 }
-
             }
         });
     }

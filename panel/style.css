@@ -86,6 +86,15 @@ footer {
 
 .item {
     height: 5%;
+    margin-left: 15px;
+    transition: transform 0.1s;
+    transform: scale(1)
+}
+
+.item:hover {
+    color: #eeede2;
+    background-color: #a29494;
+    transform: scale(1.05)
 }
 
 .item-content {
@@ -108,7 +117,7 @@ footer {
 .item-name {
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 1.5%;
+    margin-left: 1%;
 }
 
 .wrapper {
@@ -125,6 +134,11 @@ footer {
 
     margin-left: 10px;
     margin-top: 2px;
+}
+
+.wrapper:hover {
+    color: #eeede2;
+    background-color: #a29494;
 }
 
 #foldIcon {
