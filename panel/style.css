@@ -42,28 +42,28 @@ h3 {
 
 
 .btn-selectAll {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: auto;
+    position: absolute;
+    margin-top: 5%;
     margin-left: 5%;
 }
 
 .btn-foldedAll {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: auto;
-    margin-left: -20%;
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 20%;
 }
 
 .btn-parse {
-    margin-top: auto;
-    margin-bottom: auto;
+    position: absolute;
+    margin-top: 3.5%;
+    margin-left: 55%;
     width: 80px;
 }
 
 .btn-export {
-    margin-top: auto;
-    margin-bottom: auto;
+    position: absolute;
+    margin-top: 3.5%;
+    margin-left: 76%;
     width: 80px;
 }
 

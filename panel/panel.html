@@ -16,7 +16,8 @@
 
     <section>
         <ui-box-container class="flex-1 shadow layout vertical content">
-            <div v-for="item in allResList">
+            <h3 style="opacity:0.5" v-show="sceneUUid === ''">请选择你要导出资源的场景...</h3>
+            <div v-for="item in allResList" v-show="sceneUUid !== ''">
                 <asset-item v-bind:name="item.name"
                             v-bind:folded.sync="item.folded"
                             v-bind:reslist="item.reslist">
@@ -28,15 +29,18 @@
     <footer class="layout horizontal content">
         <ui-checkbox class="btn-selectAll"
                      v-value="selectAll"
-                     v-on:confirm="onSelectedAll">全选
+                     v-on:confirm="onSelectedAll"
+                     v-disabled="_checkDisabled()">全选
         </ui-checkbox>
         <ui-checkbox class="btn-foldedAll"
                      v-value="foldedAll"
                      v-on:confirm="onFoldedAll"
-                     v-show="allResList.length > 0">展开资源
+                     v-disabled="_checkDisabled()">展开资源
         </ui-checkbox>
-        <ui-button class="btn-parse blue" v-on:confirm="onParse">解析</ui-button>
-        <ui-button class="btn-export blue" v-on:confirm="onExport">导出</ui-button>
+        <!--<ui-button class="btn-parse blue" v-on:confirm="onParse"-->
+                   <!--v-disabled="sceneUUid === ''">解析</ui-button>-->
+        <ui-button class="btn-export blue" v-on:confirm="onExport"
+                   v-disabled="_checkDisabled()">导出</ui-button>
     </footer>
 
 </div>

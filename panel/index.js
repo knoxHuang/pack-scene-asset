@@ -6,7 +6,7 @@ var Detective = require('detective');
 var Define = Editor.require('packages://cocos-package/define.js');
 var Utils = Editor.require('packages://cocos-package/utils.js');
 var Item =  Editor.require('packages://cocos-package/panel/item.js');
-
+var Depend = Editor.require('packages://cocos-package/depend.js');
 var JSZip = Editor.require('packages://cocos-package/lib/jszip.min.js');
 var zip = new JSZip();
 
@@ -40,38 +40,6 @@ var getUuidAll = function (data) {
     }
 };
 
-var findDependJS = function (fspath, callback) {
-    var src = Fs.readFileSync(fspath, 'utf-8');
-    var requires = Detective(src);
-    if (!requires || requires.length === 0) {
-        return;
-    }
-    var newItem;
-    Editor.assetdb.queryAssets(null, 'javascript', (err, results) => {
-        for (var i = 0; i < requires.length; ++i ) {
-            for (var j = 0; j < results.length; ++j) {
-                var asset = results[j];
-                var name = Path.basename(asset.path);
-                if (name === requires[i] + ".js") {
-                    newItem = {
-                        uuid: asset.uuid,
-                        type: asset.type,
-                        name: name,
-                        selected: true,
-                        fspath: asset.path,
-                        icon: Utils.getIcon(asset.uuid)
-                    };
-
-                    if (callback) {
-                        callback(newItem);
-                    }
-                    break;
-                }
-            }
-        }
-    });
-};
-
 var parseScene = function (sceneUuid, callback) {
     uuidlist.push(sceneUuid);
     Editor.assetdb.queryInfoByUuid(sceneUuid, (err, asset) => {
@@ -93,7 +61,16 @@ var parseScene = function (sceneUuid, callback) {
                     faPath = Editor.assetdb.remote.uuidToFspath(meta.rawTextureUuid);
                 }
                 else if (asset.type === "javascript") {
-                    findDependJS(faPath, callback);
+                    Depend.findJS(faPath, callback);
+                }
+                else if (asset.type === "dragonbones-atlas") {
+                    Depend.findDragonBones(asset, callback);
+                }
+                else if (asset.type === "spine") {
+                    Depend.findSpine(asset, callback);
+                }
+                else if (asset.type === "tiled-map") {
+                    Depend.findTiledMap(asset, callback);
                 }
 
                 // 判断是否是内置资源，如果是就不需要导出
@@ -144,15 +121,24 @@ Editor.Panel.extend({
     messages: {},
 
     ready () {
-        Utils.init(this.profiles);
+        var localProfile = Utils.init(this.profiles);
         var vm = this._vm = new window.Vue({
             el: this.shadowRoot,
+
+            created: function () {
+                if (this.sceneUUid) {
+                    this.onParse();
+                    this._changedResItemSelectState(this.selectAll);
+                    this._changedResItemFoldedState(this.foldedAll);
+                }
+            },
+
             data: {
-                sceneUUid: "d13475c7-b37e-45d6-b6c5-25929e8a0925",
+                sceneUUid: "0611c155-5c18-4d5f-9ab5-82d4d562df5f",
                 itemList: [],
                 allResList: [],
-                selectAll: false,
-                foldedAll: false
+                selectAll: localProfile['select-all'],
+                foldedAll: localProfile['select-all']
             },
 
             watch: {
@@ -169,6 +155,11 @@ Editor.Panel.extend({
             },
 
             methods: {
+
+                _checkDisabled () {
+                    return this.sceneUUid === '' || this.allResList.length === 0;
+                },
+
                 // 设置资源项的选择状态，如果未传入数值就检测是否是全选状态
                 _changedResItemSelectState (val) {
                     if (val === undefined) {
@@ -216,19 +207,28 @@ Editor.Panel.extend({
 
                 // 获取当前所选择的场景
                 onApplyScene (event) {
-                    this.sceneUUid = event.detail.value;
+                    var val = event.detail.value;
+                    this.sceneUUid = val;
+                    if (!val) {
+                        this.onClearAll();
+                    }
+                    else {
+                        this.onParse();
+                    }
                 },
 
                 // 是否全选资源
                 onSelectedAll (event) {
                     var val = event.detail.value;
                     this._changedResItemSelectState(val);
+                    Utils.saveLocalProfile('select-all', val);
                 },
 
                 // 是否展开全部资源
                 onFoldedAll (event) {
                     var val = event.detail.value;
                     this._changedResItemFoldedState(val);
+                    Utils.saveLocalProfile('folded-all', val);
                 },
 
                 // 清空列表中的所有资源
@@ -236,8 +236,8 @@ Editor.Panel.extend({
                     uuidlist = [];
                     this.itemList = [];
                     this.allResList = [];
-                    this.selectAll = false;
-                    this.foldedAll = false;
+                    this.selectAll = localProfile['select-all'];
+                    this.foldedAll = localProfile['folded-all'];
                 },
 
                 // 解析场景中的资源并且添加到列表中
@@ -259,7 +259,11 @@ Editor.Panel.extend({
                 },
 
                 onExport (event) {
-                    Utils.showExportResDialog((path) => {
+                    Utils.showExportResDialog((outPath) => {
+                        if (!outPath) {
+                            return;
+                        }
+
                         for (var i = 0; i < this.itemList.length; ++i) {
                             var item = this.itemList[i];
                             zip.file(item.name, Fs.readFileSync(item.fspath));
@@ -269,13 +273,12 @@ Editor.Panel.extend({
                         }
 
                         zip .generateNodeStream({type:'nodebuffer',streamFiles:true})
-                            .pipe(Fs.createWriteStream(path + '/out.zip'))
+                            .pipe(Fs.createWriteStream(outPath))
                             .on('finish', function () {
                                 console.log("out.zip written.");
                             });
 
-                        Electron.shell.showItemInFolder(path + "/" + this.itemList[0].name);
-
+                        Electron.shell.showItemInFolder(outPath);
                     });
                 }
             }

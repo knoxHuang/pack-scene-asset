@@ -24,7 +24,9 @@
     "profiles": {
       "local": {
         "current-scene": "",
-        "export-resource-path": ""
+        "export-resource-path": "",
+        "select-all": false,
+        "folded-all": false
       }
     }
   }

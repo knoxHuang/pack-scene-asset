@@ -2,19 +2,21 @@
  * 资源类型枚举
  */
 var ResType = cc.Enum({
-    Resource: 0,
-    AnimClip: 1,
-    AudioClip: 2,
-    Font: 3,
-    Script: 4,
-    Prefab: 5,
-    Particle: 6,
-    Scene: 7
+    Resource: -1,
+    AnimClip: -1,
+    AudioClip: -1,
+    Font: -1,
+    Script: -1,
+    Prefab: -1,
+    Particle: -1,
+    Spine: -1,
+    DragonBones: -1,
+    Other: -1,
+    Scene: -1,
 });
 
 // 该路径是 Cocos Creator 默认资源路径
 var FILTERPATH = "editor\\static\\default-assets";
-
 
 var getResType = function (type) {
     switch (type) {
@@ -43,6 +45,14 @@ var getResType = function (type) {
             return ResType.Particle;
         case 'scene':
             return ResType.Scene;
+        case 'spine':
+            return ResType.Spine;
+        case 'dragonbones':
+        case 'dragonbones-atlas':
+        case 'dragonbones-atlas-png':
+            return ResType.DragonBones;
+        default:
+            return ResType.Other
     }
 };
 
