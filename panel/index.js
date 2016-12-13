@@ -3,11 +3,11 @@ var Fs = require("fire-fs");
 var Path = require("fire-path");
 var Detective = require('detective');
 
-var Define = Editor.require('packages://cocos-package/define.js');
-var Utils = Editor.require('packages://cocos-package/utils.js');
-var Item =  Editor.require('packages://cocos-package/panel/item.js');
-var Depend = Editor.require('packages://cocos-package/depend.js');
-var JSZip = Editor.require('packages://cocos-package/lib/jszip.min.js');
+var Define = Editor.require('packages://pack-scene-asset/define.js');
+var Utils = Editor.require('packages://pack-scene-asset/utils.js');
+var Item =  Editor.require('packages://pack-scene-asset/panel/item.js');
+var Depend = Editor.require('packages://pack-scene-asset/depend.js');
+var JSZip = Editor.require('packages://pack-scene-asset/lib/jszip.min.js');
 var zip = new JSZip();
 
 var uuidlist = [];
@@ -115,8 +115,8 @@ var addAllResList = function (allResList, itemInfo) {
 
 Editor.Panel.extend({
 
-    style: Fs.readFileSync(Editor.url('packages://cocos-package/panel/style.css')) + '',
-    template: Fs.readFileSync(Editor.url('packages://cocos-package/panel/panel.html')) + '',
+    style: Fs.readFileSync(Editor.url('packages://pack-scene-asset/panel/style.css')) + '',
+    template: Fs.readFileSync(Editor.url('packages://pack-scene-asset/panel/panel.html')) + '',
 
     messages: {},
 

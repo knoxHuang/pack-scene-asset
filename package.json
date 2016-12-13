@@ -1,19 +1,19 @@
 {
-  "name": "cocos-package",
+  "name": "pack-scene-asset",
   "version": "0.0.1",
   "description": "用于导出场景和场景相关资源",
   "author": "Knox",
   "main": "main.js",
   "main-menu": {
-    "i18n:MAIN_MENU.package.title/Knox/cocos-package": {
-      "message": "cocos-package:open"
+    "i18n:MAIN_MENU.package.title/Knox/pack-scene-asset": {
+      "message": "pack-scene-asset:open"
     }
   },
 
   "panel": {
     "main": "panel/index.js",
     "type": "dockable",
-    "title": "CocosPackage",
+    "title": "Pack Scene Asset",
     "min-width": 400,
     "max-width": 400,
     "width": 400,

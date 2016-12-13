@@ -5,7 +5,7 @@ module.exports = {
     unload: function () {},
     messages: {
         open () {
-            Editor.Panel.open('cocos-package');
+            Editor.Panel.open('pack-scene-asset');
         }
     }
 };
