@@ -134,7 +134,7 @@ Editor.Panel.extend({
             },
 
             data: {
-                sceneUUid: "0611c155-5c18-4d5f-9ab5-82d4d562df5f",
+                sceneUUid: "",
                 itemList: [],
                 allResList: [],
                 selectAll: localProfile['select-all'],
