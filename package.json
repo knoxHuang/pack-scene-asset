@@ -5,7 +5,7 @@
   "author": "Knox",
   "main": "main.js",
   "main-menu": {
-    "i18n:MAIN_MENU.package.title/Knox/pack-scene-asset": {
+    "i18n:MAIN_MENU.package.title/Pack-Scene-Asset": {
       "message": "pack-scene-asset:open"
     }
   },
@@ -13,7 +13,7 @@
   "panel": {
     "main": "panel/index.js",
     "type": "dockable",
-    "title": "Pack Scene Asset",
+    "title": "Pack Scene Asset (打包场景数据)",
     "min-width": 400,
     "max-width": 400,
     "width": 400,

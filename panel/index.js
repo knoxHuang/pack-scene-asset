@@ -26,8 +26,8 @@ var getUuidAll = function (data) {
             }
         }
         // 获取脚本 uuid
-        else if (key === "__type__" && Editor.UuidUtils.isUuid(value)) {
-            uuid = Editor.UuidUtils.decompressUuid(value);
+        else if (key === "__type__" && Editor.Utils.UuidUtils.isUuid(value)) {
+            uuid = Editor.Utils.UuidUtils.decompressUuid(value);
             if (uuidlist.indexOf(uuid) === -1) {
                 uuidlist.push(uuid);
             }
