@@ -15,7 +15,14 @@ h3 {
 
 .title {
     margin: auto;
-    height: 40px;
+    height: 30px;
+}
+
+.icon {
+    margin-left: 2px;
+    margin-right: 5px;
+    height: 18px;
+    width: 18px;
 }
 
 .asset-name {
@@ -53,7 +60,7 @@ h3 {
     margin-left: 20%;
 }
 
-.btn-parse {
+.btn-refresh {
     position: absolute;
     margin-top: 3.5%;
     margin-left: 55%;
@@ -86,7 +93,7 @@ footer {
 
 .item {
     height: 5%;
-    margin-left: 15px;
+    margin-left: 27px;
     transition: transform 0.1s;
     transform: scale(1)
 }
@@ -94,21 +101,24 @@ footer {
 .item:hover {
     color: #eeede2;
     background-color: #a29494;
-    transform: scale(1.05)
+    /*transform: scale(1.05)*/
 }
 
 .item-content {
-    margin-left: 24px;
+    margin-left: 22px;
 }
 
 .item-checkbox {
     margin-top: auto;
+    margin-right: 3.5px;
     margin-bottom: auto;
 }
 
 .item-img {
     margin-top: auto;
     margin-bottom: auto;
+
+    margin-left: 2px;
 
     max-width: 20px;
     max-height: 20px;
@@ -132,8 +142,9 @@ footer {
     color: #aaa;
     cursor: default;
 
-    margin-left: 10px;
     margin-top: 2px;
+
+    /*color: rgba(255,255,255,.25)*/
 }
 
 .wrapper:hover {
@@ -145,11 +156,48 @@ footer {
     flex: none;
 
     font-size: 14px;
-    width: 10px;
+    width: 25px;
     margin-right: 2px;
 
     cursor: pointer;
     text-align: center;
 
     visibility: visible;
+}
+
+/*-------------------------------------------------------------------------*/
+
+.folder-path {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    width: 180px;
+}
+
+.choosePath {
+    margin-left: -4%
+}
+
+.chooseBtn {
+    margin-left: 3px;
+    margin-top: 4px;
+}
+
+.progress {
+    position: relative;
+}
+
+.progress ui-progress {
+    width: 100%;
+}
+
+.progressState {
+    position: absolute;
+    top: 0;
+    line-height: 20px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: white;
 }

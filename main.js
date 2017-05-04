@@ -2,14 +2,25 @@
 
 module.exports = {
     load: function () {},
+
     unload: function () {},
+
     messages: {
-        open () {
-            Editor.Panel.open('pack-scene-asset');
+        export () {
+            Editor.Panel.open('package-asset.export');
             Editor.Metrics.trackEvent({
                 category: 'Packages',
-                label: 'pack-scene-asset',
-                action: 'Panel Open'
+                label: 'package-asset',
+                action: 'Export Asset'
+            }, null);
+        },
+
+        import () {
+            Editor.Panel.open('package-asset.import');
+            Editor.Metrics.trackEvent({
+                category: 'Packages',
+                label: 'package-asset',
+                action: 'Import Asset'
             }, null);
         }
     }

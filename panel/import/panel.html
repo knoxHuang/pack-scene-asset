@@ -1,0 +1,64 @@
+<div>
+
+    <header>
+        <h3> {{T('IMPORT_ASSET.title')}} </h3>
+        <div class="progress">
+            <ui-progress class="small progressBar" v-value="progress"></ui-progress>
+            <div class="progressState">
+                <span> {{progressState}} </span>
+            </div>
+        </div>
+        <div class="layout vertical content">
+            <div class="layout horizontal content center-justified title">
+                <ui-prop class="choosePath" name="{{T('IMPORT_ASSET.folder_path')}}" readonly>
+                    <ui-input style="width: 220px" empty v-value="folderPath"></ui-input>
+
+                </ui-prop>
+                <ui-button class="chooseBtn tiny blue"
+                           v-on:confirm="onChooseImportFolder">
+                    {{T('IMPORT_ASSET.select_path')}}
+                </ui-button>
+                <ui-button class="chooseBtn tiny blue"
+                           v-on:confirm="onClearAll"
+                           v-disabled="this.folderPath === ''">
+                    {{T('IMPORT_ASSET.clear_all')}}
+                </ui-button>
+            </div>
+
+            <div class="layout horizontal content center-justified title">
+                <ui-prop class="choosePath" name="{{T('IMPORT_ASSET.out_path')}}" readonly>
+                    <ui-input style="width: 220px" empty v-value="outPath"></ui-input>
+                </ui-prop>
+                <ui-button class="chooseBtn tiny blue"
+                           v-on:confirm="onChooseOutFolder">
+                    {{T('IMPORT_ASSET.select_path')}}
+                </ui-button>
+                <ui-button class="chooseBtn tiny blue"
+                           v-on:confirm="onClearOutPath"
+                           v-disabled="this.outPath === ''">
+                    {{T('IMPORT_ASSET.clear_all')}}
+                </ui-button>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <ui-box-container class="flex-1 shadow layout vertical content">
+            <h3 style="opacity:0.5" v-show="folderPath === ''"> {{T('IMPORT_ASSET.content_tips')}} </h3>
+            <package-import-asset-item v-if="folderPath !== ''"
+                                   v-bind:fileTree="filetree">
+            </package-import-asset-item>
+        </ui-box-container>
+    </section>
+
+    <footer>
+
+        <div style="margin-top: 10px; margin-left: 75%" class="layout horizontal content">
+            <ui-button style="width: 100px" class="big blue"
+                       v-on:confirm="onImport"
+                       v-disabled="_isDisabled()"> {{T('IMPORT_ASSET.import')}}
+            </ui-button>
+        </div>
+    </footer>
+
+</div>

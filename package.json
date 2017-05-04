@@ -1,19 +1,14 @@
 {
-  "name": "pack-scene-asset",
+  "name": "package-asset",
   "version": "0.0.1",
-  "description": "用于导出场景和场景相关资源",
+  "description": "导入导出资源插件",
   "author": "Knox",
   "main": "main.js",
-  "main-menu": {
-    "i18n:MAIN_MENU.package.title/Pack-Scene-Asset": {
-      "message": "pack-scene-asset:open"
-    }
-  },
-
-  "panel": {
-    "main": "panel/index.js",
+  "scene-script": "scene-walker.js",
+  "panel.export": {
+    "main": "panel/export/index.js",
     "type": "dockable",
-    "title": "Pack Scene Asset (打包场景数据)",
+    "title": "Export Asset",
     "min-width": 400,
     "max-width": 400,
     "width": 400,
@@ -23,10 +18,28 @@
 
     "profiles": {
       "local": {
-        "current-scene": "",
+        "current-resource": "",
         "export-resource-path": "",
         "select-all": false,
-        "folded-all": false
+        "folded-all": true
+      }
+    }
+  },
+
+  "panel.import": {
+    "main": "panel/import/index.js",
+    "type": "dockable",
+    "title": "Import Asset",
+    "min-width": 450,
+    "max-width": 450,
+    "width": 450,
+    "min-height": 510,
+    "max-height": 510,
+    "height": 510,
+    "profiles": {
+      "local": {
+        "import-folder-path": "",
+        "out-path": ""
       }
     }
   }

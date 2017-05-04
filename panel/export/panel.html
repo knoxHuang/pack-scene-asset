@@ -1,0 +1,39 @@
+<div>
+
+    <header>
+        <h3> {{T('EXPORT_ASSET.title')}} </h3>
+        <div class="layout horizontal content center-justified title">
+            <p class="asset-name"> {{T('EXPORT_ASSET.asset')}} </p>
+            <ui-asset class="asset-scene"
+                      empty
+                      v-value="assetUuid"
+                      v-on:confirm="onAssetChanged">
+            </ui-asset>
+            <ui-button class="btn-brower blue" v-on:confirm="onChooseScene"> {{T('EXPORT_ASSET.select_path')}} </ui-button>
+            <ui-button class="btn-clear blue" v-on:confirm="onClearAll"> {{T('EXPORT_ASSET.clear_all')}} </ui-button>
+        </div>
+    </header>
+
+    <section>
+        <ui-box-container class="flex-1 shadow layout vertical content">
+            <h3 style="opacity:0.5" v-show="!_showContent()"> {{T('EXPORT_ASSET.content_tips')}} </h3>
+            <ui-loader v-show="_showLoadBar()" class="massive">Loading</ui-loader>
+            <package-export-asset-item v-if="_showContent()"
+                                   v-bind:assettree="assetTree">
+            </package-export-asset-item>
+        </ui-box-container>
+    </section>
+
+    <footer class="layout horizontal content">
+        <ui-checkbox unnavigable class="btn-selectAll"
+                     v-value="foldedAll"
+                     v-on:confirm="onFoldedAll"
+                     v-disabled="_isDisabled()"> {{T('EXPORT_ASSET.folded_all')}}
+        </ui-checkbox>
+        <ui-button class="btn-refresh blue" v-on:confirm="onRefresh"
+                   v-disabled="_isDisabled()"> {{T('EXPORT_ASSET.refresh')}} </ui-button>
+        <ui-button class="btn-export blue" v-on:confirm="onExport"
+                   v-disabled="_isDisabled()"> {{T('EXPORT_ASSET.export')}} </ui-button>
+    </footer>
+
+</div>
